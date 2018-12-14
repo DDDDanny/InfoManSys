@@ -1,0 +1,7 @@
+{% load static %}
+<title>{% block tit %}{% endblock %}</title>
+<link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'bootstrap/js/jquery-3.3.1.js' %} " type="text/javascript"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+{% block content %}{% endblock %}

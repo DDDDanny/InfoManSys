@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>平台信息编辑</title>
+</head>
+<body>
+<form action="{% url 'infoSys:pla_info_add' %}" method="post">
+    {% csrf_token %}
+    {% if pla_info %}
+        <input type="hidden" name="id" value="{{ pla_info.pla_id }}">
+        <label>平台名称
+            <input type="text" name="planame" value="{{ pla_info.pla_name }}"/>
+        </label>
+        <label>平台类型
+            <input type="text" name="platype" value="{{ pla_info.pla_type }}"/>
+        </label>
+        <label>平台地址
+            <input type="text" name="plaadds" value="{{ pla_info.pla_adds }}"/>
+        </label>
+        <label>管理平台地址
+            <input type="text" name="manageadds" value="{{ pla_info.manage_adds }}"/>
+        </label>
+        <label>前置机地址
+            <input type="text" name="forwardadds" value="{{ pla_info.forward_adds }}"/>
+        </label><br/><br/>
+        <label>AppEui
+            <input type="text" name="appeui" value="{{ pla_info.appeui }}"/>
+        </label>
+        <label>主站安装路径
+            <input type="text" name="plapath" value="{{ pla_info.pla_path }}"/>
+        </label>
+        <label>前置机安装路径
+            <input type="text" name="forwardpath" value="{{ pla_info.forward_path }}"/>
+        </label>
+        <label>备注
+            <input type="text" name="remake" value="{{ pla_info.remake }}"/>
+        </label>
+        <label>所属服务器
+            <select name="serinfo">
+                {% for ser in ser_info %}
+                    <option value="{{ ser.ser_id }}" {% if ser.ser_id == pla_info.serInfo.ser_id %}
+                            selected="selected"{% endif %}>{{ ser.ser_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% else %}
+        <label>平台名称
+            <input type="text" name="planame"/>
+        </label>
+        <label>平台类型
+            <input type="text" name="platype"/>
+        </label>
+        <label>平台地址
+            <input type="text" name="plaadds"/>
+        </label>
+        <label>管理平台地址
+            <input type="text" name="manageadds"/>
+        </label>
+        <label>前置机地址
+            <input type="text" name="forwardadds"/>
+        </label><br/><br/>
+        <label>AppEui
+            <input type="text" name="appeui"/>
+        </label>
+        <label>主站安装路径
+            <input type="text" name="plapath"/>
+        </label>
+        <label>前置机安装路径
+            <input type="text" name="forwardpath"/>
+        </label>
+        <label>备注
+            <input type="text" name="remake"/>
+        </label>
+        <label>所属服务器
+            <select name="serinfo">
+                {% for ser in ser_info %}
+                    <option value="{{ ser.ser_id }}">{{ ser.ser_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% endif %}
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'infoSys/index.html' %}
+{% block context %}
+    {#    <a href="{% url 'infoSys:pla_info_edit' 0 %}">添加平台</a>#}
+    <table class="table table-hover">
+        <tr>
+            <th>平台id&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>平台名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>平台类型&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>平台地址&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>管理平台地址&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>前置机地址&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>AppEui&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>主站安装路径&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>前置机安装路径&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>更新时间&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>备注&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>所属服务器&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>编辑&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>删除</th>
+        </tr>
+        {% for pla in pla_info %}
+            <tr>
+                <th>{{ pla.pla_id }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.pla_name }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.pla_type }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.pla_adds }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.manage_adds }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.forward_adds }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.appeui }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.pla_path }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.forward_path }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.pla_time }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.remake }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pla.serInfo }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:pla_info_edit' pla.pla_id %}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:pla_info_del' pla.pla_id %}">删除</a></th>
+            </tr>
+        {% endfor %}
+    </table>
+    {#    <a href="{% url 'infoSys:index' %}">返回首页</a>#}
+{% endblock %}

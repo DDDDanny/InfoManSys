@@ -1,0 +1,27 @@
+{% extends 'infoSys/index.html' %}
+{% block context %}
+    {#    <a href="{% url 'infoSys:pro_info_edit' 0 %}">添加项目</a>#}
+    <table class="table table-hover">
+        <tr>
+            <th>项目id&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>项目名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>项目地址&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>创建时间&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>创建人id&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>编辑&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>删除</th>
+        </tr>
+        {% for pro in pro_info %}
+            <tr>
+                <th>{{ pro.pro_id }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pro.pro_name }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pro.pro_adds }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pro.pro_time }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ pro.user }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:pro_info_edit' pro.pro_id %}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:pro_info_del' pro.pro_id %}">删除</a></th>
+            </tr>
+        {% endfor %}
+    </table>
+    {#    <a href="{% url 'infoSys:index' %}">返回首页</a>#}
+{% endblock %}

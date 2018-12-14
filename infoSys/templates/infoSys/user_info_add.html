@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息添加</title>
+    {% extends 'infoSys/header.html' %}
+</head>
+<body>
+{% block content %}
+    <form action="{% url 'infoSys:user_info_add' %}" method="post">
+        {% csrf_token %}
+        {% if user_info %}
+            <input type="hidden" name="id" value="{{ user_info.user_id }}">
+            <div class="form-group">
+                <label>用户名
+                    <input type="text" name="username" class="form-control" value="{{ user_info.user_name }}"/>
+                </label>
+            </div>
+            <label>登录名
+                <input type="text" name="nickname" value="{{ user_info.user_nickname }}"/>
+            </label>
+            <label>电话号码
+                <input type="text" name="phone" value="{{ user_info.user_phone }}"/>
+            </label>
+            <label>密码
+                <input type="text" name="pwd" value="{{ user_info.user_pwd }}"/>
+            </label>
+        {% else %}
+            <label>用户名
+                <input type="text" name="username"/>
+            </label>
+            <label>登录名
+                <input type="text" name="nickname"/>
+            </label>
+            <label>电话号码
+                <input type="text" name="phone"/>
+            </label>
+            <label>密码
+                <input type="text" name="pwd"/>
+            </label>
+        {% endif %}
+        <input type="submit" value="提交">
+    </form>
+{% endblock %}
+</body>
+</html>

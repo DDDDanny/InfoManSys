@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息编辑</title>
+</head>
+<body>
+<form action="{% url 'infoSys:pro_info_add' %}" method="post">
+    {% csrf_token %}
+    {% if pro_info %}
+        <input type="hidden" name="id" value="{{ pro_info.pro_id }}">
+        <label>项目名称
+            <input type="text" name="proname" value="{{ pro_info.pro_name }}"/>
+        </label>
+        <label>项目地址
+            <input type="text" name="proadds" value="{{ pro_info.pro_adds }}"/>
+        </label>
+    {% else %}
+        <label>项目名称
+            <input type="text" name="proname"/>
+        </label>
+        <label>项目地址
+            <input type="text" name="proadds"/>
+        </label>
+        <label>创建人
+            <select name="username">
+                {% for user in user_info %}
+                    <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% endif %}
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

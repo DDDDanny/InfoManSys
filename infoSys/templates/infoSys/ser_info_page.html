@@ -1,0 +1,31 @@
+{% extends 'infoSys/index.html' %}
+{% block context %}
+    {#    <a href="{% url 'infoSys:ser_info_edit' 0 %}">添加服务器</a>#}
+    <table class="table table-hover">
+        <tr>
+            <th>服务器id&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>服务器名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>服务器地址&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>服务器登陆名&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>服务器密码&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>更新时间&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>服务器所属项目&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>编辑&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>删除</th>
+        </tr>
+        {% for ser in ser_info %}
+            <tr>
+                <th>{{ ser.ser_id }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ser.ser_name }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ser.ser_adds }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ser.ser_loginName }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ser.ser_loginPwd }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ser.ser_time }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ser.projectInfo }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:ser_info_edit' ser.ser_id %}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:ser_info_del' ser.ser_id %}">删除</a></th>
+            </tr>
+        {% endfor %}
+    </table>
+    {#    <a href="{% url 'infoSys:index' %}">返回首页</a>#}
+{% endblock %}

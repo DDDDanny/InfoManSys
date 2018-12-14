@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务器信息编辑</title>
+</head>
+<body>
+<form action="{% url 'infoSys:ser_info_add' %}" method="post">
+    {% csrf_token %}
+    {% if ser_info %}
+        <input type="hidden" name="id" value="{{ ser_info.ser_id }}">
+        <label>服务器名称
+            <input type="text" name="sername" value="{{ ser_info.ser_name }}"/>
+        </label>
+        <label>服务器地址
+            <input type="text" name="seradds" value="{{ ser_info.ser_adds }}"/>
+        </label>
+        <label>服务器登陆名
+            <input type="text" name="loginname" value="{{ ser_info.ser_loginName }}"/>
+        </label>
+        <label>服务器密码
+            <input type="text" name="loginpwd" value="{{ ser_info.ser_loginPwd }}"/>
+        </label>
+        <label>所属项目
+            <select name="proinfo">
+                {% for pro in pro_info %}
+                    <option value="{{ pro.pro_id }}"
+                            {#                            设置下拉菜单默认值#}
+                            {% if ser_info.projectInfo.pro_id == pro.pro_id %}
+                            selected="selected" {% endif %}>{{ pro.pro_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% else %}
+        <label>服务器名称
+            <input type="text" name="sername"/>
+        </label>
+        <label>服务器地址
+            <input type="text" name="seradds"/>
+        </label>
+        <label>服务器登陆名
+            <input type="text" name="loginname"/>
+        </label>
+        <label>服务器密码
+            <input type="text" name="loginpwd"/>
+        </label>
+        <label>所属项目
+            <select name="proinfo">
+                {% for pro in pro_info %}
+                    <option value="{{ pro.pro_id }}">{{ pro.pro_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% endif %}
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

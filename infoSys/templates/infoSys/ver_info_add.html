@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>版本信息编辑</title>
+</head>
+<body>
+<form action="{% url 'infoSys:ver_info_add' %}" method="post">
+    {% csrf_token %}
+    {% if ver_info %}
+        <input type="hidden" name="id" value="{{ ver_info.ver_id }}">
+        <label>版本号
+            <input type="text" name="verno" value="{{ ver_info.ver_no }}"/>
+        </label>
+        <label>修改内容
+            <input type="text" name="verupd" value="{{ ver_info.ver_upd }}"/>
+        </label>
+        <label>版本创建人
+            <input type="text" name="veruser" value="{{ ver_info.ver_user }}"/>
+        </label>
+        <label>所属平台
+            <select name="plainfo">
+                {% for pla in pla_info %}
+                    <option value="{{ pla.pla_id }}" {% if ver_info.platform.pla_id == pla.pla_id %}
+                            selected{% endif %}>{{ pla.pla_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% else %}
+        <label>版本号
+            <input type="text" name="verno"/>
+        </label>
+        <label>修改内容
+            <input type="text" name="verupd"/>
+        </label>
+        <label>版本创建人
+            <input type="text" name="veruser"/>
+        </label>
+        <label>所属平台
+            <select name="plainfo">
+                {% for pla in pla_info %}
+                    <option value="{{ pla.pla_id }}">{{ pla.pla_name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    {% endif %}
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

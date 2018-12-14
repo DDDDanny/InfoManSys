@@ -1,0 +1,29 @@
+{% extends 'infoSys/index.html' %}
+{% block context %}
+    {#    <a href="{% url 'infoSys:ver_info_edit' 0 %}">添加版本</a>#}
+    <table class="table table-hover">
+        <tr>
+            <th>版本id&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>版本号&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>修改内容&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>更新时间&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>版本创建人&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>所属平台&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>编辑&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>删除</th>
+        </tr>
+        {% for ver in ver_info %}
+            <tr>
+                <th>{{ ver.ver_id }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ver.ver_no }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ver.ver_upd }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ver.ver_time }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ver.ver_user }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ ver.platform }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:ver_info_edit' ver.ver_id %}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th><a href="{% url 'infoSys:ver_info_del' ver.ver_id %}">删除</a></th>
+            </tr>
+        {% endfor %}
+    </table>
+    {#    <a href="{% url 'infoSys:index' %}">返回首页</a>#}
+{% endblock %}

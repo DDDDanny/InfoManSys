@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运维信息管理平台</title>
+    {% extends 'infoSys/header.html' %}
+    {% load static %}
+</head>
+{% block content %}
+    <body>
+    <div class="main_index">
+        <div class="new_header">
+            <label class="new_label">运 维 信 息 管 理 平 台 (O&M IM)</label>
+            <div class="menu_drop">
+                <div class="dropdown">
+                    <a href="#" style="text-decoration: none;" class="dropdown-toggle menu_drop_tit"
+                       data-toggle="dropdown">
+                        Administrator
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" style="min-width: 120px">
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                修改密码
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                退出系统
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="top_con">
+            <div class="new_menu">
+                <ul class="menu_row">
+                    <li>
+                        <a href="{% url 'infoSys:pro_info_page' %}">
+                            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+                            <label>项目信息管理</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'infoSys:ser_info_page' %}">
+                            <span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>
+                            <label>服务器信息管理</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'infoSys:pla_info_page' %}">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            <label>平台信息管理</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'infoSys:ver_info_page' %}">
+                            <span class="glyphicon glyphicon glyphicon-tags" aria-hidden="true"></span>
+                            <label>版本信息控制</label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'infoSys:user_info_page' %}">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <label>人员信息管理</label>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="new_context">
+                <div class="btn-bg">
+                    <div class="btn-bg-2">
+                        <button type="button" class="btn btn-success">添 加</button>
+                        <button type="button" class="btn btn-warning">编 辑</button>
+                        <button type="button" class="btn btn-danger">删 除</button>
+                    </div>
+                    <div class="col-lg-2 btn-ser">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% block context %}{% endblock %}
+            </div>
+        </div>
+        <div class="new_footer">
+            Copyright © Version 1.0.1
+        </div>
+    </div>
+    </body>
+{% endblock %}
+</html>

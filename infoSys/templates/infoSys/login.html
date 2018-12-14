@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    {% extends 'infoSys/header.html' %}
+    {% load static %}
+</head>
+{% block content %}
+    <body>
+    <div class="login" style="background-image: url({% static 'pic/index2.jpg' %}); ">
+        <div class="bg">
+            <label class="index_name">运维信息管理平台</label>
+            <div class="center" style="opacity: unset">
+                <form action="{% url 'infoSys:login_jud' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label style="float: none;">用户名
+                            <input type="text" name="username" class="form-control input_shadow">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>密码
+                            <input type="password" name="pwd" class="form-control input_shadow">
+                        </label>
+                    </div>
+                    <input type="submit" value="登  录" class="btn btn-danger input_shadow"
+                           style="width: 200px; margin-top: 20px">
+                    {% if messages %}
+                        <script>
+                            {% for msg in messages %}
+                                alert('{{ msg.message }}');
+                            {% endfor %}
+                        </script>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}
+</html>
