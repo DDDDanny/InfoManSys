@@ -2,8 +2,10 @@ from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
 from . import models
 
+
 def login(request):
     return render(request, 'infoSys/login.html')
+
 
 def login_jud(request):
     # 从前端获取用户名和密码
@@ -22,19 +24,23 @@ def login_jud(request):
     messages.error(request, '用户名或密码输入错误！请重新输入！')  # 不能用大写！
     return redirect('infoSys:login')
 
+
 def index(request):
     return render(request, 'infoSys/index.html')
+
 
 # 浏览用户信息
 def user_info_page(request):
     user_info = models.User.objects.all()
     return render(request, 'infoSys/user_info_page.html', {'user_info': user_info})
 
+
 def user_info_edit(request, user_id):
     if str(user_id) == '0':
         return render(request, 'infoSys/user_info_add.html')  # 如果id为0，则是新添加
     user_info = models.User.objects.get(pk=user_id)
     return render(request, 'infoSys/user_info_add.html', {'user_info': user_info})
+
 
 # 添加用户信息（&编辑用户信息）
 def user_info_add(request):
@@ -73,6 +79,7 @@ def user_info_add(request):
     )
     return redirect('infoSys:user_info_page')
 
+
 # 删除用户信息
 def user_info_del(request, user_id):
     if str(user_id) != '0':
@@ -80,10 +87,12 @@ def user_info_del(request, user_id):
         return redirect('infoSys:user_info_page')
     return HttpResponse('Error!')
 
+
 # 查看项目信息
 def project_info_page(request):
     pro_info = models.ProjectInfo.objects.all()
     return render(request, 'infoSys/pro_info_page.html', {'pro_info': pro_info})
+
 
 # 编辑项目信息向导
 def project_info_edit(request, pro_id):
@@ -93,6 +102,7 @@ def project_info_edit(request, pro_id):
         return render(request, 'infoSys/pro_info_add.html', {'user_info': user_info})
     pro_info = models.ProjectInfo.objects.get(pk=pro_id)
     return render(request, 'infoSys/pro_info_add.html', {'pro_info': pro_info})
+
 
 # 添加项目信息&编辑项目信息
 def project_info_add(request):
@@ -115,6 +125,7 @@ def project_info_add(request):
     )
     return redirect('infoSys:pro_info_page')
 
+
 # 删除项目信息
 def project_info_del(request, pro_id):
     if str(pro_id) != '0':
@@ -122,10 +133,12 @@ def project_info_del(request, pro_id):
         return redirect('infoSys:pro_info_page')
     return HttpResponse('Error!')
 
+
 # 浏览服务器信息
 def ser_info_page(request):
     ser_info = models.SerInfo.objects.all()
     return render(request, 'infoSys/ser_info_page.html', {'ser_info': ser_info})
+
 
 # 编辑服务器信息向导
 def ser_info_edit(request, ser_id):
@@ -134,6 +147,7 @@ def ser_info_edit(request, ser_id):
         return render(request, 'infoSys/ser_info_add.html', {'pro_info': pro_info})
     ser_info = models.SerInfo.objects.get(pk=ser_id)
     return render(request, 'infoSys/ser_info_add.html', {'ser_info': ser_info, 'pro_info': pro_info})
+
 
 # 添加服务器信息&编辑服务器信息
 def ser_info_add(request):
@@ -163,6 +177,7 @@ def ser_info_add(request):
     )
     return redirect('infoSys:ser_info_page')
 
+
 # 删除服务器信息
 def ser_info_del(request, ser_id):
     if str(ser_id) != '0':
@@ -170,10 +185,12 @@ def ser_info_del(request, ser_id):
         return redirect('infoSys:ser_info_page')
     return HttpResponse('Error!')
 
+
 # 浏览平台信息
 def pla_info_page(request):
     pla_info = models.Platform.objects.all()
     return render(request, 'infoSys/pla_info_page.html', {'pla_info': pla_info})
+
 
 # 编辑平台信息向导
 def pla_info_edit(request, pla_id):
@@ -182,6 +199,7 @@ def pla_info_edit(request, pla_id):
         return render(request, 'infoSys/pla_info_add.html', {'ser_info': ser_info})
     pal_info = models.Platform.objects.get(pk=pla_id)
     return render(request, 'infoSys/pla_info_add.html', {'ser_info': ser_info, 'pla_info': pal_info})
+
 
 # 添加平台信息&编辑平台信息
 def pla_info_add(request):
@@ -225,6 +243,7 @@ def pla_info_add(request):
     )
     return redirect('infoSys:pla_info_page')
 
+
 # 删除平台信息
 def pla_info_del(request, pla_id):
     if str(pla_id) != '0':
@@ -232,10 +251,12 @@ def pla_info_del(request, pla_id):
         return redirect('infoSys:pla_info_page')
     return HttpResponse('Error!')
 
+
 # 浏览版本信息
 def ver_info_page(request):
     ver_info = models.Version.objects.all()
     return render(request, 'infoSys/ver_info_page.html', {'ver_info': ver_info})
+
 
 # 编辑版本信息向导
 def ver_info_edit(request, ver_id):
@@ -244,6 +265,7 @@ def ver_info_edit(request, ver_id):
         return render(request, 'infoSys/ver_info_add.html', {'pla_info': pla_info})
     ver_info = models.Version.objects.get(pk=ver_id)
     return render(request, 'infoSys/ver_info_add.html', {'pla_info': pla_info, 'ver_info': ver_info})
+
 
 # 添加版本信息&编辑版本信息
 def ver_info_add(request):
@@ -268,6 +290,7 @@ def ver_info_add(request):
         platform=models.Platform.objects.get(pla_id=plainfo)
     )
     return redirect('infoSys:ver_info_page')
+
 
 # 删除版本信息
 def ver_info_del(request, ver_id):
