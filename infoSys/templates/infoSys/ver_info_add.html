@@ -1,50 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>版本信息编辑</title>
-</head>
-<body>
+<!-- 清除模态框数据 -->
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+    });
+</script>
+
+<!-- Modal-context -->
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">添加版本信息</h4>
+</div>
 <form action="{% url 'infoSys:ver_info_add' %}" method="post">
-    {% csrf_token %}
-    {% if ver_info %}
-        <input type="hidden" name="id" value="{{ ver_info.ver_id }}">
-        <label>版本号
-            <input type="text" name="verno" value="{{ ver_info.ver_no }}"/>
-        </label>
-        <label>修改内容
-            <input type="text" name="verupd" value="{{ ver_info.ver_upd }}"/>
-        </label>
-        <label>版本创建人
-            <input type="text" name="veruser" value="{{ ver_info.ver_user }}"/>
-        </label>
-        <label>所属平台
-            <select name="plainfo">
-                {% for pla in pla_info %}
-                    <option value="{{ pla.pla_id }}" {% if ver_info.platform.pla_id == pla.pla_id %}
-                            selected{% endif %}>{{ pla.pla_name }}</option>
-                {% endfor %}
-            </select>
-        </label>
-    {% else %}
-        <label>版本号
-            <input type="text" name="verno"/>
-        </label>
-        <label>修改内容
-            <input type="text" name="verupd"/>
-        </label>
-        <label>版本创建人
-            <input type="text" name="veruser"/>
-        </label>
-        <label>所属平台
-            <select name="plainfo">
-                {% for pla in pla_info %}
-                    <option value="{{ pla.pla_id }}">{{ pla.pla_name }}</option>
-                {% endfor %}
-            </select>
-        </label>
-    {% endif %}
-    <input type="submit" value="提交">
+    <div class="modal-body">
+        {% csrf_token %}
+        {% if ver_info %}
+            <input type="hidden" name="id" value="{{ ver_info.ver_id }}">
+            <label class="control-label modal-label">版本号
+                <input type="text" name="verno" value="{{ ver_info.ver_no }}" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">修改内容
+                <input type="text" name="verupd" value="{{ ver_info.ver_upd }}" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">版本创建人
+                <input type="text" name="veruser" value="{{ ver_info.ver_user }}" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">所属平台
+                <select name="plainfo" class="form-control">
+                    {% for pla in pla_info %}
+                        <option value="{{ pla.pla_id }}" {% if ver_info.platform.pla_id == pla.pla_id %}
+                                selected{% endif %}>{{ pla.pla_name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        {% else %}
+            <label class="control-label modal-label">版本号
+                <input type="text" name="verno" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">修改内容
+                <input type="text" name="verupd" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">版本创建人
+                <input type="text" name="veruser" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">所属平台
+                <select name="plainfo" class="form-control ">
+                    {% for pla in pla_info %}
+                        <option value="{{ pla.pla_id }}">{{ pla.pla_name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        {% endif %}
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
 </form>
-</body>
-</html>

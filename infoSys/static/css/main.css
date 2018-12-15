@@ -197,3 +197,15 @@
     right: 1%;
 }
 
+.modal-label{
+    width: 100%;
+}
+
+tr th{
+    text-align: center;
+}
+
+.btn_a{
+    width: 8vw;
+    margin-left: 1%;
+}

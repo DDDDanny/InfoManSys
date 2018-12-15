@@ -1,28 +1,50 @@
 {% extends 'infoSys/index.html' %}
 {% block context %}
-    {#    <a href="{% url 'infoSys:user_info_edit' 0 %}">添加用户</a>#}
-    <table class="table table-hover">
+    <div class="btn-bg">
+        <div class="btn-bg-2">
+            <a type="button" class="btn btn-success btn_a" data-toggle="modal" data-target="#myModal"
+               href="{% url 'infoSys:user_info_edit' 0 %}">添 加</a>
+        </div>
+        <div class="col-lg-2 btn-ser">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered">
         <tr>
-            <th>用户ID&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>用户名&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>登陆名&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>电话号码&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>登陆密码&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            {#            <th>编辑&nbsp;&nbsp;&nbsp;&nbsp;</th>#}
-            {#            <th>删除</th>#}
+            <th>用户名</th>
+            <th>登陆名</th>
+            <th>电话号码</th>
+            <th>登陆密码</th>
+            <th>编辑</th>
+            <th>删除</th>
         </tr>
         {% for user in user_info %}
             <tr>
-                <th>{{ user.user_id }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>{{ user.user_name }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>{{ user.user_nickname }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>{{ user.user_phone }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>{{ user.user_pwd }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                {#                <th><a href="{% url 'infoSys:user_info_edit' user.user_id %}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;</th>#}
-                {#                <th><a href="{% url 'infoSys:user_info_del' user.user_id %}">删除</a></th>#}
+                <th>{{ user.user_name }}</th>
+                <th>{{ user.user_nickname }}</th>
+                <th>{{ user.user_phone }}</th>
+                <th>{{ user.user_pwd }}</th>
+                <th>
+                    <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal"
+                       href="{% url 'infoSys:user_info_edit' user.user_id %}">编辑</a>
+                </th>
+                <th>
+                    <a type="button" class="btn btn-danger" href="{% url 'infoSys:user_info_del' user.user_id %}">删除</a>
+                </th>
             </tr>
         {% endfor %}
     </table>
-    {#    <a href="{% url 'infoSys:index' %}">返回首页</a>#}
-{% endblock %}
 
+    <!-- AddUser-Modal -->
+    <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content"></div><!--modal-content-->
+        </div>
+    </div>
+{% endblock %}

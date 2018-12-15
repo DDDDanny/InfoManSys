@@ -14,6 +14,7 @@ urlpatterns = [
     # 用户登录
     path('login/', views.login, name='login'),
     path('login_jud/', views.login_jud, name='login_jud'),
+    path('logout/', views.logout, name='logout'),
     # 人员相关路由
     path('index/', views.index, name='index'),
     path('userInfo/', views.user_info_page, name='user_info_page'),

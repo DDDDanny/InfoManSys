@@ -7,6 +7,10 @@ def login(request):
     return render(request, 'infoSys/login.html')
 
 
+def logout(request):
+    return redirect('infoSys:login')
+
+
 def login_jud(request):
     # 从前端获取用户名和密码
     user_login_name = request.POST.get('username', '')

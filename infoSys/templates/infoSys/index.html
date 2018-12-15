@@ -27,7 +27,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">
+                            <a href="{% url 'infoSys:logout' %}">
                                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                                 退出系统
                             </a>
@@ -72,21 +72,6 @@
                 </ul>
             </div>
             <div class="new_context">
-                <div class="btn-bg">
-                    <div class="btn-bg-2">
-                        <button type="button" class="btn btn-success">添 加</button>
-                        <button type="button" class="btn btn-warning">编 辑</button>
-                        <button type="button" class="btn btn-danger">删 除</button>
-                    </div>
-                    <div class="col-lg-2 btn-ser">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-info" type="button">Go!</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
                 {% block context %}{% endblock %}
             </div>
         </div>

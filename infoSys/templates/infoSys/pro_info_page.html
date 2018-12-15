@@ -1,27 +1,52 @@
 {% extends 'infoSys/index.html' %}
 {% block context %}
-    {#    <a href="{% url 'infoSys:pro_info_edit' 0 %}">添加项目</a>#}
-    <table class="table table-hover">
+    <div class="btn-bg">
+        <div class="btn-bg-2">
+            <a type="button" class="btn btn-success btn_a" data-toggle="modal" data-target="#myModal"
+               href="{% url 'infoSys:pro_info_edit' 0 %}">添 加</a>
+        </div>
+        <div class="col-lg-2 btn-ser">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered">
         <tr>
-            <th>项目id&nbsp;&nbsp;&nbsp;&nbsp;</th>
             <th>项目名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
             <th>项目地址&nbsp;&nbsp;&nbsp;&nbsp;</th>
             <th>创建时间&nbsp;&nbsp;&nbsp;&nbsp;</th>
             <th>创建人id&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <th>编辑&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>编辑</th>
             <th>删除</th>
         </tr>
         {% for pro in pro_info %}
             <tr>
-                <th>{{ pro.pro_id }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>{{ pro.pro_name }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>{{ pro.pro_adds }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>{{ pro.pro_time }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>{{ pro.user }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th><a href="{% url 'infoSys:pro_info_edit' pro.pro_id %}">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th><a href="{% url 'infoSys:pro_info_del' pro.pro_id %}">删除</a></th>
+                <th>
+                    <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal"
+                       href="{% url 'infoSys:pro_info_edit' pro.pro_id %}">编辑</a>
+                </th>
+                <th>
+                    <a type="button" class="btn btn-danger" href="{% url 'infoSys:pro_info_del' pro.pro_id %}">删除</a>
+                </th>
             </tr>
         {% endfor %}
     </table>
-    {#    <a href="{% url 'infoSys:index' %}">返回首页</a>#}
+
+    <!-- AddPro-Modal -->
+    <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+
+            </div><!--modal-content-->
+        </div>
+    </div>
 {% endblock %}

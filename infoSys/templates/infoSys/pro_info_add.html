@@ -1,36 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>项目信息编辑</title>
-</head>
-<body>
+<!-- 清除模态框数据 -->
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+    });
+</script>
+
+<!-- Modal-context -->
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">添加项目信息</h4>
+</div>
 <form action="{% url 'infoSys:pro_info_add' %}" method="post">
-    {% csrf_token %}
-    {% if pro_info %}
-        <input type="hidden" name="id" value="{{ pro_info.pro_id }}">
-        <label>项目名称
-            <input type="text" name="proname" value="{{ pro_info.pro_name }}"/>
-        </label>
-        <label>项目地址
-            <input type="text" name="proadds" value="{{ pro_info.pro_adds }}"/>
-        </label>
-    {% else %}
-        <label>项目名称
-            <input type="text" name="proname"/>
-        </label>
-        <label>项目地址
-            <input type="text" name="proadds"/>
-        </label>
-        <label>创建人
-            <select name="username">
-                {% for user in user_info %}
-                    <option value="{{ user.user_id }}">{{ user.user_name }}</option>
-                {% endfor %}
-            </select>
-        </label>
-    {% endif %}
-    <input type="submit" value="提交">
+    <div class="modal-body">
+        {% csrf_token %}
+        {% if pro_info %}
+            <input type="hidden" name="id" value="{{ pro_info.pro_id }}">
+            <label class="control-label modal-label">项目名称
+                <input type="text" name="proname" value="{{ pro_info.pro_name }}" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">项目地址
+                <input type="text" name="proadds" value="{{ pro_info.pro_adds }}" class="form-control"/>
+            </label>
+        {% else %}
+            <label class="control-label modal-label">项目名称
+                <input type="text" name="proname" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">项目地址
+                <input type="text" name="proadds" class="form-control"/>
+            </label>
+            <label class="control-label modal-label">创建人
+                <select name="username" class="form-control ">
+                    {% for user in user_info %}
+                        <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        {% endif %}
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
 </form>
-</body>
-</html>
+
