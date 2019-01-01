@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # 人员信息
 class User(models.Model):
     user_id = models.AutoField(primary_key=True, verbose_name='用户ID')
@@ -8,9 +9,11 @@ class User(models.Model):
     user_phone = models.CharField(max_length=12, blank=False, verbose_name='电话')
     user_pwd = models.CharField(max_length=15, blank=False, verbose_name='密码')
     is_enable = models.BooleanField(default=True, verbose_name='是否有效')
+    last_login = models.DateTimeField(max_length=6, auto_now=True ,verbose_name='最后登录时间')
 
     def __str__(self):
         return self.user_name
+
 
 # 项目信息
 class ProjectInfo(models.Model):
@@ -23,6 +26,7 @@ class ProjectInfo(models.Model):
 
     def __str__(self):
         return self.pro_name
+
 
 # 服务器信息
 class SerInfo(models.Model):
@@ -38,6 +42,7 @@ class SerInfo(models.Model):
 
     def __str__(self):
         return self.ser_name
+
 
 # 平台信息
 class Platform(models.Model):
@@ -57,6 +62,7 @@ class Platform(models.Model):
 
     def __str__(self):
         return self.pla_name
+
 
 # 版本信息
 class Version(models.Model):

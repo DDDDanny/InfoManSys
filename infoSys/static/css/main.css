@@ -209,3 +209,10 @@ tr th{
     width: 8vw;
     margin-left: 1%;
 }
+
+.error-pos{
+    width: 18em;
+    position: relative;
+    top: 2em;
+    left: -2em;
+}

@@ -26,6 +26,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = (
+    'infoSys.views.CustomBackend',
+)
+
 # Application definition
 
 INSTALLED_APPS = [

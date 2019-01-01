@@ -1,31 +1,70 @@
-from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
+from django.views.generic.base import View
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.backends import ModelBackend
+from django.db.models import Q
+
 from . import models
+from .forms import LoginForm
 
 
-def login(request):
-    return render(request, 'infoSys/login.html')
+# 重构authenticate方法
+class CustomBackend(ModelBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        # noinspection PyBroadException
+        try:
+            user = models.User.objects.get(Q(user_nickname=username), Q(user_pwd=password))
+            if user is not None:
+                return user
+        except Exception as Error:
+            return None
 
 
-def logout(request):
-    return redirect('infoSys:login')
+# 重构用户登录逻辑
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'infoSys/login.html')
 
-
-def login_jud(request):
-    # 从前端获取用户名和密码
-    user_login_name = request.POST.get('username', '')
-    user_login_pwd = request.POST.get('pwd', '')
-    user_info = models.User.objects.all()
-    # 判断用户名与密码为空的情况
-    if user_login_name == '' or user_login_pwd == '':
-        messages.error(request, '用户名或密码不能为空！')
-        return redirect('infoSys:login')
-    else:
-        # 判断用户名和密码是否正确
-        for user in user_info:
-            if user_login_name == user.user_nickname and user_login_pwd == user.user_pwd:
+    def post(self, request):
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            user_login_name = request.POST.get('username', '')
+            user_login_pwd = request.POST.get('pwd', '')
+            user = authenticate(username=user_login_name, password=user_login_pwd)  # 用户认证
+            if user is not None:  # 判断用户是否可以登录（session相关）
+                login(request, user)
                 return redirect('infoSys:index')
-    messages.error(request, '用户名或密码输入错误！请重新输入！')  # 不能用大写！
+            else:
+                return render(request, 'infoSys/login.html', {'msg': '用户名或密码错误!'})
+        else:
+            return render(request, 'infoSys/login.html', {'login_form': login_form})
+
+
+# 用户登录逻辑（旧）
+# def login(request):
+#     return render(request, 'infoSys/login.html')
+#
+#
+# def login_jud(request):
+#     # 从前端获取用户名和密码
+#     user_login_name = request.POST.get('username', '')
+#     user_login_pwd = request.POST.get('pwd', '')
+#     user_info = models.User.objects.all()
+#     # 判断用户名与密码为空的情况
+#     if user_login_name == '' or user_login_pwd == '':
+#         messages.error(request, '用户名或密码不能为空！')
+#         return redirect('infoSys:login')
+#     else:
+#         # 判断用户名和密码是否正确
+#         for user in user_info:
+#             if user_login_name == user.user_nickname and user_login_pwd == user.user_pwd:
+#                 return redirect('infoSys:index')
+#     messages.error(request, '用户名或密码输入错误！请重新输入！')  # 不能用大写！
+#     return redirect('infoSys:login')
+
+
+# 用户登出系统
+def logout(request):
     return redirect('infoSys:login')
 
 
