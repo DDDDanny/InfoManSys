@@ -16,29 +16,31 @@
                     {% csrf_token %}
                     <div class="form-group {% if login_form.errors.username %} has-error {% endif %}">
                         <label style="float: none;">用户名
-                            <input type="text" name="username" class="form-control input_shadow has-error">
+                            <input type="text" name="username" class="form-control input_shadow has-error"
+                                   value="{{ login_form.username.value | default_if_none:'' }}">
                         </label>
                     </div>
                     <div class="form-group {% if login_form.errors.pwd %} has-error {% endif %}">
                         <label>密码
-                            <input type="password" name="pwd" class="form-control input_shadow">
+                            <input type="password" name="pwd" class="form-control input_shadow"
+                                   value="{{ login_form.pwd.value | default_if_none:'' }}">
                         </label>
                     </div>
                     <input type="submit" value="登  录" class="btn btn-danger input_shadow"
                            style="width: 200px; margin-top: 20px">
+                    {% if login_form.errors or msg %}
+                        <div class="alert alert-danger alert-dismissible error-pos" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>错误!</strong>
+                            {% for key,error in login_form.errors.items %}
+                                {{ error }}
+                            {% endfor %}
+                            {{ msg }}
+                        </div>
+                    {% endif %}
                 </form>
-                {% if login_form.errors %}
-                    <div class="alert alert-danger alert-dismissible error-pos" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <strong>错误!</strong>
-                        {% for key,error in login_form.errors.items %}
-                            {{ error }}
-                        {% endfor %}
-                        {{ msg }}
-                    </div>
-                {% endif %}
             </div>
         </div>
     </div>

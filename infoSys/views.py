@@ -33,9 +33,10 @@ class LoginView(View):
             user = authenticate(username=user_login_name, password=user_login_pwd)  # 用户认证
             if user is not None:  # 判断用户是否可以登录（session相关）
                 login(request, user)
+                # request.session['username'] = user_login_name
                 return redirect('infoSys:index')
             else:
-                return render(request, 'infoSys/login.html', {'msg': '用户名或密码错误!'})
+                return render(request, 'infoSys/login.html', {'msg': '用户名或密码错误!', 'login_form': login_form})
         else:
             return render(request, 'infoSys/login.html', {'login_form': login_form})
 
@@ -69,6 +70,7 @@ def logout(request):
 
 
 def index(request):
+    # username = request.session.get('username', '')
     return render(request, 'infoSys/index.html')
 
 
